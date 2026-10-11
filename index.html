@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CavoraAI AR 3D Building Planning &amp; Interior Design</title>
+<meta name="description" content="Aus DWG- und PDF-Plänen wird ein begehbares, massgenaues 3D-Modell mit Möblierung, Haustechnik und AR. Im Browser, ohne Installation. Von Cavora Partners.">
+<meta name="theme-color" content="#0A2463">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CavoraAI AR 3D Building Planning & Interior Design">
+<meta property="og:description" content="Aus Ihren Plänen wird ein Gebäude, das man begehen kann: 3D im Browser, Fachebenen, AR-Masse, AR auf Smartphone und Tablet.">
+<meta property="og:image" content="assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/hero.jpg" as="image">
+<style>
+:root{--ink:#0B1526;--ink2:#3F4A63;--ink3:#7C879E;--line:#E6E9F0;--line2:#CBD2DE;--navy:#0A2463;--blue:#1E56A0;--blueBg:#E8EFFA;--green:#047857;--greenBg:#E4F3EC;--max:1200px;
+--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:10px}
+.eyebrow:before{content:"";width:22px;height:1px;background:currentColor}
+h1,h2,h3{color:var(--navy);margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(32px,3.9vw,50px);line-height:1.06;font-weight:700}
+h2{font-size:clamp(28px,3.2vw,42px);line-height:1.12;font-weight:700}
+h3{font-size:18px;line-height:1.3;font-weight:650}
+p{margin:0}.lead{font-size:19px;color:var(--ink2);max-width:58ch}
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 15px/1 var(--sans);padding:14px 20px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:#071a4a;text-decoration:none}
+.btn.ghost{background:#fff;color:var(--navy)}.btn.ghost:hover{background:var(--blueBg)}
+.btn .ar{font-family:var(--mono)}
+/* Navigation */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.2) blur(6px)}
+.nav{display:flex;align-items:center;gap:28px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:700;letter-spacing:-.01em}.brand:hover{text-decoration:none}
+.brand small{font:500 11px var(--mono);color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:1px}
+.navlinks{display:flex;gap:22px;margin-left:auto}.navlinks a{color:var(--ink2);font-size:14px}.navlinks a:hover{color:var(--navy);text-decoration:none}
+.lang{font:600 12px var(--mono);border:1px solid var(--line2);background:#fff;color:var(--ink2);padding:8px 10px;cursor:pointer}
+.nav .btn{padding:10px 14px;font-size:14px}
+@media(max-width:980px){.navlinks{display:none}}@media(max-width:520px){.nav{gap:12px}.brand small{display:none}.nav .btn{padding:9px 11px;font-size:13px}}
+/* Hero */
+.hero{padding:64px 0 40px}
+.hero .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center}
+.hero h1{margin:18px 0 20px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 26px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--ink2)}.facts span:before{content:"";display:inline-block;width:6px;height:6px;background:var(--green);margin-right:8px;vertical-align:2px}
+.stage{position:relative;border-top:2px solid var(--navy);box-shadow:0 18px 50px rgba(10,36,99,.14);background:#eef3ea;aspect-ratio:16/11;overflow:hidden}
+.stage iframe,.stage img.poster{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.stage .chips{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;z-index:3}
+.chip{font:500 12px var(--sans);padding:7px 10px;border:1px solid var(--line2);background:rgba(255,255,255,.95);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.stage .tag{position:absolute;top:12px;left:12px;z-index:3;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.95);padding:6px 9px;color:var(--ink2)}
+.stage .tag b{color:var(--green)}
+.stage .open{position:absolute;top:12px;right:12px;z-index:3;font:600 12px var(--sans);background:var(--navy);color:#fff;padding:8px 11px}
+.stage .play{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;z-index:4}
+@media(max-width:980px){.hero .grid{grid-template-columns:1fr}.stage{aspect-ratio:4/3}}
+/* Sektionen */
+section{padding:96px 0}
+section.alt{background:#F7FAFF;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.head{max-width:760px;margin-bottom:48px}.head h2{margin:16px 0 14px}.head p{color:var(--ink2);font-size:18px}
+.cards{display:grid;gap:20px}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}.c2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.c3,.c4{grid-template-columns:1fr 1fr}}@media(max-width:640px){.c3,.c4,.c2{grid-template-columns:1fr}}
+.card{background:#fff;border-top:2px solid var(--navy);padding:24px;box-shadow:0 1px 0 var(--line)}
+.card h3{margin:14px 0 8px}.card p{color:var(--ink2);font-size:15px}
+.card .ic{width:36px;height:36px;display:grid;place-items:center;background:var(--blueBg);color:var(--blue)}
+.card.g{border-top-color:var(--green)}.card.g .ic{background:var(--greenBg);color:var(--green)}
+.num{font:600 13px var(--mono);color:var(--blue)}
+/* Galerie */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tabs button{font:500 14px var(--sans);padding:9px 14px;border:1px solid var(--line2);background:#fff;color:var(--ink2);cursor:pointer}
+.tabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.shot{border-top:2px solid var(--navy);box-shadow:0 18px 50px rgba(10,36,99,.12);background:#eef3ea}
+.shot img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.cap{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-top:14px;color:var(--ink2);font-size:15px}
+.cap a{white-space:nowrap;font-weight:600}
+/* Ablauf */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:26px 24px 0 0;border-top:2px solid var(--line2);position:relative}
+.step:before{content:"";position:absolute;top:-2px;left:0;width:56px;height:2px;background:var(--navy)}
+.step h3{margin:12px 0 8px}.step p{color:var(--ink2);font-size:15px}
+@media(max-width:980px){.steps{grid-template-columns:1fr 1fr;gap:28px}}@media(max-width:640px){.steps{grid-template-columns:1fr}}
+/* Interior */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+@media(max-width:980px){.split{grid-template-columns:1fr}}
+.figure{position:relative;border-top:2px solid var(--navy);box-shadow:0 18px 50px rgba(10,36,99,.12)}
+.figure figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.95);font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;color:var(--ink2)}
+ul.check{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px}
+ul.check li{padding-left:28px;position:relative;color:var(--ink2)}
+ul.check li:before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg)}
+/* Kennzahlen */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:8px}
+.stat{border-top:2px solid var(--navy);padding-top:16px}.stat b{font:600 30px/1.1 var(--mono);color:var(--navy);display:block}.stat span{color:var(--ink2);font-size:14px}
+@media(max-width:820px){.stats{grid-template-columns:1fr 1fr}}
+/* CTA */
+.cta{background:var(--navy);color:#fff;padding:88px 0}
+.cta h2{color:#fff}.cta p{color:#C9D3E8;font-size:18px;max-width:60ch;margin-top:14px}
+.cta .eyebrow{color:#9FB0D6}
+.cta .btn{background:#fff;color:var(--navy);border-color:#fff}.cta .btn.ghost{background:transparent;color:#fff;border-color:#9FB0D6}
+.cta .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+footer{padding:48px 0;color:var(--ink2);font-size:14px;border-top:1px solid var(--line)}
+footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}footer h4{margin:0 0 10px;font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+footer .claim{font-weight:600;color:var(--navy);margin-top:10px}
+@media(max-width:820px){footer .grid{grid-template-columns:1fr}}
+.legal{display:none;margin-top:28px;border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--ink2)}
+.legal:target{display:block}
+.small{font-size:13px;color:var(--ink3)}
+/* Einblenden */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+[data-en]{}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="CavoraAI AR 3D">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#0A2463"/><path d="M8 21.5 16 26l8-4.5v-11L16 6l-8 4.5z" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M8 10.5 16 15l8-4.5M16 15v11" fill="none" stroke="#fff" stroke-width="1.8"/></svg>
+      <span>CavoraAI<small>AR 3D Planning</small></span>
+    </a>
+    <nav class="navlinks" aria-label="Hauptnavigation">
+      <a href="#funktionen" data-i="nav1">Funktionen</a><a href="#demo" data-i="nav2">Live-Demo</a><a href="#ablauf" data-i="nav3">Ablauf</a><a href="#anwendungen" data-i="nav4">Anwendungen</a><a href="#vertrauen" data-i="nav5">Vertrauen</a>
+    </nav>
+    <button class="lang" id="lang" aria-label="Sprache wechseln">EN</button>
+    <a class="btn" href="https://ai.cavorapartners.com" data-i="ctaDemo">Demo anfordern</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding-top:56px">
+  <div class="wrap grid">
+    <div class="rv">
+      <div class="eyebrow">AR 3D Building Planning &amp; Interior Design</div>
+      <h1 data-i="h1">Aus Ihren Plänen wird ein Gebäude, das man begehen kann.</h1>
+      <p class="lead" data-i="lead">CavoraAI liest DWG- und PDF-Pläne und baut daraus ein massgenaues 3D-Modell mit Möblierung, Elektro und Haustechnik. Begehbar im Browser, auf dem Tisch in AR, ohne Installation.</p>
+      <div class="ctas">
+        <a class="btn" href="demo.html" data-i="ctaLive">Live-Demo öffnen <span class="ar">→</span></a>
+        <a class="btn ghost" href="/cdn-cgi/l/email-protection#51273821113230273e2330213023253f3423227f323e3c6e2224333b3432256c1230273e2330101874636110037463616215746361013d303f3f383f36" data-i="ctaPlan">Grundriss senden</a>
+      </div>
+      <div class="facts"><span data-i="f1">DWG, DXF und PDF als Grundlage</span><span data-i="f2">Eine HTML-Datei, läuft offline</span><span data-i="f3">GLB und USDZ für AR</span><span data-i="f4">Deutsch und Englisch</span></div>
+    </div>
+    <div class="stage rv" id="stage">
+      <img class="poster" src="assets/hero.jpg" alt="3D-Übersicht eines Musterbüros mit Möblierung" id="poster">
+      <div class="tag"><b>●</b> <span data-i="live">Live 3D · fiktives Musterbüro</span></div>
+      <a class="open" href="demo.html" data-i="full">Vollbild</a>
+      <button class="btn play" id="play" data-i="play">3D starten</button>
+      <div class="chips" id="chips" hidden>
+        <button class="chip" data-m="walk" data-i="cWalk">Begehung</button>
+        <button class="chip on" data-m="over" data-i="cOver">Übersicht</button>
+        <button class="chip" data-k="vent"><i style="background:#6D28D9"></i><span data-i="cVent">Lüftung</span></button>
+        <button class="chip" data-k="it"><i style="background:#1E56A0"></i><span data-i="cIt">IT</span></button>
+        <button class="chip" data-k="hlk"><i style="background:#B4532A"></i><span data-i="cHlk">HLK</span></button>
+        <button class="chip" data-k="elek"><i style="background:#D9822B"></i><span data-i="cElek">Elektro</span></button>
+        <button class="chip" data-k="section" data-i="cSec">Schnitt</button>
+        <button class="chip" data-k="stamps" data-i="cStamp">Raumstempel</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" style="padding:56px 0">
+  <div class="wrap stats rv">
+    <div class="stat"><b>7</b><span data-i="s1">Fachebenen: Elektro, IT, HLK, Lüftung, Automation, Energie, Sanitär</span></div>
+    <div class="stat"><b>1:1</b><span data-i="s2">Begehung in Augenhöhe, Masse aus Ihren Plänen</span></div>
+    <div class="stat"><b>1:50</b><span data-i="s3">AR-Modell für iPhone, iPad und Android</span></div>
+    <div class="stat"><b>0</b><span data-i="s4">Installationen, Plug-ins oder externe Skripte im Viewer</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e1">Ausgangslage</div><h2 data-i="h2a">Pläne sind präzise. Verstanden werden sie selten.</h2><p data-i="p2a">Wer entscheidet, liest selten Grundrisse. Wer plant, arbeitet in getrennten Plänen. Das Ergebnis sind späte Fragen und teure Änderungen.</p></div>
+    <div class="cards c3">
+      <div class="card rv"><div class="num">01</div><h3 data-i="pa1">Entscheide ohne Raumgefühl</h3><p data-i="pa1t">Bauherrschaft und Geschäftsleitung sehen Linien statt Räume. Fragen zu Platz, Licht und Möblierung tauchen erst auf, wenn gebaut wird.</p></div>
+      <div class="card rv"><div class="num">02</div><h3 data-i="pa2">Fachplanungen nebeneinander</h3><p data-i="pa2t">Elektro, Lüftung, Heizung und IT liegen in eigenen Plänen. Wo sie sich in die Quere kommen, zeigt sich oft erst auf der Baustelle.</p></div>
+      <div class="card rv"><div class="num">03</div><h3 data-i="pa3">Visualisierung als Extraprojekt</h3><p data-i="pa3t">Klassische Renderings brauchen ein eigenes Modell und mehrere Runden. Jede Planänderung beginnt von vorn.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="funktionen">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e2">Was Sie bekommen</div><h2 data-i="h2b">Ein Modell. Alle Fragen am selben Ort.</h2><p data-i="p2b">Geometrie, Möblierung und Haustechnik stammen aus Ihren Plänen. Was dort fehlt, ist als Annahme gekennzeichnet.</p></div>
+    <div class="cards c4">
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="2"/><path d="M12 8v6l-3 7M12 14l3 7M8 11h8"/></svg></div><h3 data-i="F1">Begehung in Augenhöhe</h3><p data-i="F1t">Durch jeden Raum gehen, mit Kollision an Wänden und Möbeln, Minikarte und Sprung in jeden Raum.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/></svg></div><h3 data-i="F2">AR-Masse und Messen</h3><p data-i="F2t">Lichte Raummasse, Raumhöhe, Tür- und Fensterbreiten einblenden. Zwei Punkte anklicken, Abstand ablesen.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></div><h3 data-i="F3">Sieben Fachebenen</h3><p data-i="F3t">Elektro, IT und Glasfaser, HLK, Lüftung, Gebäudeautomation, Energie und Sanitär. Farbig, mit Legende und Tooltip.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18"/><path d="M3 12h18"/></svg></div><h3 data-i="F4">Schnitt und Raumfokus</h3><p data-i="F4t">Horizontalschnitt in jeder Höhe. "Nur dieser Raum" blendet alles andere aus.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="12"/><path d="M8 9h8M8 13h5"/></svg></div><h3 data-i="F5">Raumstempel</h3><p data-i="F5t">Nutzung, Fläche, Arbeitsplätze und Soll-Beleuchtungsstärke nach SN EN 12464-1, direkt im Raum.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 11h14v4H5zM7 15v5M17 15v5M7 11V6h10v5"/></svg></div><h3 data-i="F6">Produktkarten</h3><p data-i="F6t">Jedes Möbel anklickbar: Bezeichnung, Masse B x T x H und Material.</p></div>
+      <div class="card rv g"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="m9 13 3-2 3 2v3l-3 2-3-2z"/></svg></div><h3 data-i="F7">AR auf Smartphone und Tablet</h3><p data-i="F7t">Modell im Massstab 1:50 als USDZ für iPhone und iPad, als GLB für Android. WebXR, wo das Gerät es kann.</p></div>
+      <div class="card rv g"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3 data-i="F8">Annahmen sichtbar</h3><p data-i="F8t">Was nicht aus dem Plan stammt, ist gekennzeichnet. Keine stillen Schätzungen bei Höhen, Leistungen oder Luftmengen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e3">Live-Demo</div><h2 data-i="h2c">So sieht ein Projekt aus.</h2><p data-i="p2c">Ein fiktives Musterbüro mit 13 Räumen. Alles, was Sie hier sehen, läuft live im Browser. Keine Kundendaten.</p></div>
+    <div class="rv">
+      <div class="tabs" id="tabs">
+        <button class="on" data-s="0" data-i="t0">Übersicht</button><button data-s="1" data-i="t1">Fachebenen</button><button data-s="2" data-i="t2">Schnitt</button><button data-s="3" data-i="t3">Begehung</button><button data-s="4" data-i="t4">AR-Masse</button><button data-s="5" data-i="t5">Teeküche</button>
+      </div>
+      <div class="shot"><img id="shot" src="assets/hero.jpg" alt="Übersicht des Musterbüros" loading="lazy" width="1600" height="1000"></div>
+      <div class="cap"><span id="cap"></span><a href="demo.html" data-i="tryit">Selbst ausprobieren →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap split">
+    <figure class="figure rv" style="margin:0"><img src="assets/interior.jpg" alt="Fotorealistische Visualisierung eines Besprechungsraums" loading="lazy" width="1376" height="768"><figcaption data-i="figcap">Beispielvisualisierung</figcaption></figure>
+    <div class="rv">
+      <div class="eyebrow" data-i="e4">Interior Design</div>
+      <h2 style="margin:16px 0 14px" data-i="h2d">Die Einrichtung sehen, bevor sie bestellt ist.</h2>
+      <p class="lead" data-i="p2d">Laden Sie ein Foto des Raums hoch. Beschreiben Sie Möbel oder geben Sie Produktbilder mit. CavoraAI erzeugt fotorealistische Einrichtungsvarianten Ihres Raums.</p>
+      <ul class="check">
+        <li data-i="i1">Ihr Raumfoto als Grundlage, nicht ein Katalograum</li>
+        <li data-i="i2">Möbel per Beschreibung oder als Bild, in mehreren Ansichten gleichbleibend</li>
+        <li data-i="i3">Für die Wirkung zählt das Bild, für die Masse das 3D-Modell</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e5">Ablauf</div><h2 data-i="h2e">Vom Plan zur Begehung in vier Schritten.</h2></div>
+    <div class="steps rv">
+      <div class="step"><div class="num">01</div><h3 data-i="st1">Pläne übergeben</h3><p data-i="st1t">DWG, DXF oder PDF. Raumfotos und Möbelwünsche sind optional.</p></div>
+      <div class="step"><div class="num">02</div><h3 data-i="st2">Modell entsteht</h3><p data-i="st2t">Wände, Türen, Fenster, Möbel und Elektro werden aus Ebenen und Blöcken übernommen. Flächen werden gegen den Plan geprüft.</p></div>
+      <div class="step"><div class="num">03</div><h3 data-i="st3">Prüfen und ergänzen</h3><p data-i="st3t">Fachebenen, Raumstempel und Annahmen. Offene Punkte stehen als Liste da, nicht im Kleingedruckten.</p></div>
+      <div class="step"><div class="num">04</div><h3 data-i="st4">Teilen</h3><p data-i="st4t">Eine HTML-Datei für alle Beteiligten, AR-Dateien für Smartphone und Tablet, auf Deutsch und Englisch.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="anwendungen">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e6">Anwendungen</div><h2 data-i="h2f">Überall, wo Räume entschieden werden.</h2></div>
+    <div class="cards c2">
+      <div class="card rv"><h3 data-i="u1">Umnutzung Wohnen zu Büro</h3><p data-i="u1t">Bürolayout, Arbeitsplätze und Haustechnik im Bestand prüfen. Mit unserem Prüfraster für Go oder No-Go: Baurecht, Brandschutz, Gebäudetechnik, Büroqualität und Wirtschaftlichkeit.</p></div>
+      <div class="card rv"><h3 data-i="u2">Mieterausbau und Vermarktung</h3><p data-i="u2t">Interessenten gehen durch die Fläche, bevor sie gebaut ist. Varianten der Möblierung zeigen, was auf die Fläche passt.</p></div>
+      <div class="card rv"><h3 data-i="u3">Koordination der Haustechnik</h3><p data-i="u3t">Elektro, Lüftung, Heizung, IT und Sanitär übereinander im Raum statt nebeneinander auf Papier. Konflikte werden sichtbar, bevor sie Geld kosten.</p></div>
+      <div class="card rv"><h3 data-i="u4">Interior Design und Möblierung</h3><p data-i="u4t">Möbel mit echten Massen im Modell, Wirkung im fotorealistischen Bild. Produktkarten halten fest, was wohin gehört.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="vertrauen">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow" data-i="e7">Vertrauen</div><h2 data-i="h2g">Gebaut für Häuser, die Rechenschaft ablegen.</h2><p data-i="p2g">Cavora Partners verbindet Informationssicherheit, Compliance und KI. Das gilt auch für Ihre Pläne.</p></div>
+    <div class="cards c4">
+      <div class="card g rv"><h3 data-i="v1">Getrennt</h3><p data-i="v1t">Jeder Kunde hat einen eigenen Datenraum. Ihre Pläne werden nicht mit anderen Projekten vermischt.</p></div>
+      <div class="card g rv"><h3 data-i="v2">Lokal im Browser</h3><p data-i="v2t">Der 3D-Viewer lädt keine externen Skripte, Schriften oder Tracker und setzt keine Cookies.</p></div>
+      <div class="card g rv"><h3 data-i="v3">Offene Formate</h3><p data-i="v3t">HTML, GLB und USDZ. Ihre Pläne bleiben DWG und PDF. Kein Lock-in.</p></div>
+      <div class="card g rv"><h3 data-i="v4">Nachvollziehbar</h3><p data-i="v4t">Jede Annahme ist gekennzeichnet, jede Zahl hat eine Quelle: Plan, Norm oder Beispielwert.</p></div>
+    </div>
+    <p class="small rv" style="margin-top:22px" data-i="dsnote">Die Plattform CavoraAI speichert Gespräche, Dateien und Wissen in einem Rechenzentrum in Zürich. Die Sprachmodelle laufen bei Anbietern in den USA. Die vollständigen Angaben erhalten Sie mit dem Angebot.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap rv">
+    <div class="eyebrow" data-i="e8">Nächster Schritt</div>
+    <h2 style="margin-top:16px" data-i="h2h">Senden Sie uns einen Grundriss.</h2>
+    <p data-i="p2h">Wir zeigen Ihnen Ihr Gebäude als begehbares 3D-Modell, mit den Fachebenen, die Sie brauchen. Vertraulich und in Ihrem eigenen Datenraum.</p>
+    <div class="ctas"><a class="btn" href="https://ai.cavorapartners.com" data-i="ctaDemo2">Demo anfordern</a><a class="btn ghost" href="/cdn-cgi/l/email-protection#e1978891a18280978e9380918093958f849392cf828e8cde9294838b848295dca280978e9380a0a8c4d3d1a0b3c4d3d1d2a5c4d3d1b18d808f8f888f86"><span class="__cf_email__" data-cfemail="74021d04341715021b0615041506001a1106075a171b19">[email&#160;protected]</span></a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div><b style="color:var(--navy)">CAVORA PARTNERS GmbH</b><br>Pestalozziweg 7, 8952 Schlieren, Schweiz<br>+41 44 798 17 35 · <a href="/cdn-cgi/l/email-protection#20564950604341564f5241504152544e4552530e434f4d"><span class="__cf_email__" data-cfemail="4b3d223b0b282a3d24392a3b2a393f252e393865282426">[email&#160;protected]</span></a><div class="claim">Sicherheit. Vertrauen. Produktivität.</div></div>
+      <div><h4 data-i="fo1">Produkt</h4><a href="#funktionen" data-i="nav1">Funktionen</a><br><a href="demo.html" data-i="nav2">Live-Demo</a><br><a href="#ablauf" data-i="nav3">Ablauf</a></div>
+      <div><h4 data-i="fo2">Rechtliches</h4><a href="#impressum" data-i="imp">Impressum</a><br><a href="#datenschutz" data-i="ds">Datenschutz</a><br><a href="https://cavorapartners.com">cavorapartners.com</a></div>
+    </div>
+    <div class="legal" id="impressum"><b data-i="imp">Impressum</b><p>Cavora Partners GmbH, Pestalozziweg 7, 8952 Schlieren, Schweiz · UID CHE-283.646.749 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9aecf3eadaf9fbecf5e8fbeafbe8eef4ffe8e9b4f9f5f7">[email&#160;protected]</a> · +41 44 798 17 35</p></div>
+    <div class="legal" id="datenschutz"><b data-i="ds">Datenschutz</b><p data-i="dst">Diese Website setzt keine Cookies und lädt keine externen Skripte, Schriften oder Tracker. Der Webhoster kann technisch notwendige Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt) protokollieren. Wenn Sie uns per E-Mail kontaktieren, verwenden wir Ihre Angaben nur zur Bearbeitung der Anfrage. Die Demo zeigt ein fiktives Musterbüro ohne Personendaten. Kontakt für Datenschutzfragen: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb9d829bab888a9d84998a9b8a999f858e9998c5888486">[email&#160;protected]</a>.</p></div>
+    <p class="small" style="margin-top:24px" data-i="foot">Demo: fiktives Musterbüro, keine Kundendaten. Annahmen und Beispielwerte sind im Modell gekennzeichnet.</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+var EN={nav1:"Features",nav2:"Live demo",nav3:"How it works",nav4:"Use cases",nav5:"Trust",ctaDemo:"Request a demo",ctaDemo2:"Request a demo",
+h1:"Your drawings become a building you can walk through.",lead:"CavoraAI reads DWG and PDF drawings and builds a dimensionally accurate 3D model with furniture, electrical and building services. Walk through it in the browser, put it on the table in AR, no installation.",
+ctaLive:"Open live demo →",ctaPlan:"Send a floor plan",f1:"DWG, DXF and PDF as source",f2:"One HTML file, works offline",f3:"GLB and USDZ for AR",f4:"German and English",
+live:"Live 3D · fictitious sample office",full:"Full screen",play:"Start 3D",cWalk:"Walkthrough",cOver:"Overview",cVent:"Ventilation",cIt:"IT",cHlk:"HVAC",cElek:"Electrical",cSec:"Section",cStamp:"Room labels",
+s1:"Service layers: electrical, IT, HVAC, ventilation, automation, energy, plumbing",s2:"Walkthrough at eye level, dimensions from your drawings",s3:"AR model for iPhone, iPad and Android",s4:"Installations, plug-ins or external scripts in the viewer",
+e1:"Starting point",h2a:"Drawings are precise. They are rarely understood.",p2a:"Decision makers seldom read floor plans. Planners work in separate drawings. The result is late questions and expensive changes.",
+pa1:"Decisions without a sense of space",pa1t:"Owners and management see lines instead of rooms. Questions about space, light and furniture come up once construction starts.",
+pa2:"Services planned side by side",pa2t:"Electrical, ventilation, heating and IT live in separate drawings. Where they clash often shows only on site.",
+pa3:"Visualisation as an extra project",pa3t:"Classic renderings need their own model and several rounds. Every change in the plan starts over.",
+e2:"What you get",h2b:"One model. Every question in one place.",p2b:"Geometry, furniture and building services come from your drawings. Anything missing there is marked as an assumption.",
+F1:"Walkthrough at eye level",F1t:"Walk through every room with collision at walls and furniture, a mini map and a jump into any room.",
+F2:"AR dimensions and measuring",F2t:"Show clear room dimensions, room height, door and window widths. Click two points, read the distance.",
+F3:"Seven service layers",F3t:"Electrical, IT and fibre, HVAC, ventilation, building automation, energy and plumbing. Colour coded, with legend and tooltips.",
+F4:"Section and room focus",F4t:"Horizontal section at any height. \"This room only\" hides everything else.",
+F5:"Room labels",F5t:"Use, area, desks and target illuminance per SN EN 12464-1, right in the room.",
+F6:"Product cards",F6t:"Click any piece of furniture: name, size W x D x H and material.",
+F7:"AR on smartphone and tablet",F7t:"Model at scale 1:50 as USDZ for iPhone and iPad, as GLB for Android. WebXR where the device supports it.",
+F8:"Assumptions made visible",F8t:"Anything not taken from the drawing is marked. No silent estimates for heights, loads or air volumes.",
+e3:"Live demo",h2c:"This is what a project looks like.",p2c:"A fictitious sample office with 13 rooms. Everything you see runs live in the browser. No customer data.",
+t0:"Overview",t1:"Service layers",t2:"Section",t3:"Walkthrough",t4:"AR dimensions",t5:"Kitchenette",tryit:"Try it yourself →",
+figcap:"Example visualisation",e4:"Interior design",h2d:"See the interior before it is ordered.",p2d:"Upload a photo of the room. Describe furniture or add product images. CavoraAI creates photorealistic furnishing variants of your room.",
+i1:"Your room photo as the basis, not a catalogue room",i2:"Furniture by description or image, consistent across several views",i3:"The image shows the effect, the 3D model holds the dimensions",
+e5:"How it works",h2e:"From drawing to walkthrough in four steps.",st1:"Hand over drawings",st1t:"DWG, DXF or PDF. Room photos and furniture wishes are optional.",
+st2:"The model is built",st2t:"Walls, doors, windows, furniture and electrical are taken from layers and blocks. Areas are checked against the drawing.",
+st3:"Review and complete",st3t:"Service layers, room labels and assumptions. Open points are listed, not hidden in small print.",
+st4:"Share",st4t:"One HTML file for everyone involved, AR files for smartphone and tablet, in German and English.",
+e6:"Use cases",h2f:"Wherever rooms are decided.",u1:"Converting residential to office",u1t:"Check office layout, desks and building services in the existing building. With our go or no-go checklist: zoning, fire safety, building services, office quality and economics.",
+u2:"Tenant fit-out and letting",u2t:"Prospects walk through the space before it is built. Furniture variants show what fits.",
+u3:"Coordinating building services",u3t:"Electrical, ventilation, heating, IT and plumbing on top of each other in the room instead of side by side on paper. Clashes show before they cost money.",
+u4:"Interior design and furnishing",u4t:"Furniture with real dimensions in the model, the effect in a photorealistic image. Product cards record what goes where.",
+e7:"Trust",h2g:"Built for organisations that are accountable.",p2g:"Cavora Partners combines information security, compliance and AI. That applies to your drawings too.",
+v1:"Separated",v1t:"Each customer has its own data space. Your drawings are never mixed with other projects.",v2:"Local in the browser",v2t:"The 3D viewer loads no external scripts, fonts or trackers and sets no cookies.",
+v3:"Open formats",v3t:"HTML, GLB and USDZ. Your drawings stay DWG and PDF. No lock-in.",v4:"Traceable",v4t:"Every assumption is marked, every number has a source: drawing, standard or example value.",
+dsnote:"The CavoraAI platform stores conversations, files and knowledge in a data centre in Zurich. The language models run at providers in the USA. Full details come with the offer.",
+e8:"Next step",h2h:"Send us a floor plan.",p2h:"We show you your building as a walkable 3D model with the service layers you need. Confidential and in your own data space.",
+fo1:"Product",fo2:"Legal",imp:"Legal notice",ds:"Privacy",dst:"This website sets no cookies and loads no external scripts, fonts or trackers. The web host may log technically necessary access data (e.g. IP address, time). If you contact us by e-mail, we use your details only to handle the request. The demo shows a fictitious sample office without personal data. Privacy contact: vip@cavorapartners.com.",
+foot:"Demo: fictitious sample office, no customer data. Assumptions and example values are marked in the model."};
+var CAP={de:["Übersicht ohne Decke: 13 Räume, Möblierung und Leuchten aus den Plandaten.","Lüftung, IT-Trasse und HLK übereinander, mit Legende und Tooltip.","Horizontalschnitt auf 1.10 m: Wände dunkel gefüllt wie im Plan.","Begehung in Augenhöhe im Open Space, mit Kollision und Minikarte.","Nur dieser Raum mit AR-Massen: lichte Masse, Raumhöhe und Öffnungsbreiten.","Teeküche mit Geschirrspüler, Spüle, Hochschrank und Barhockern."],
+en:["Overview without ceiling: 13 rooms, furniture and luminaires from the drawing data.","Ventilation, IT tray and HVAC on top of each other, with legend and tooltips.","Horizontal section at 1.10 m: walls filled dark as in the drawing.","Walkthrough at eye level in the open space, with collision and mini map.","This room only with AR dimensions: clear dimensions, room height and opening widths.","Kitchenette with dishwasher, sink, tall unit and bar stools."]};
+var DE={};document.querySelectorAll('[data-i]').forEach(function(n){DE[n.dataset.i]=n.textContent});
+var lang=(localStorage.getItem('lang')||((navigator.language||'de').slice(0,2)==='de'?'de':'en'));
+var frame=null,cur=0;
+function apply(){document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(function(n){var k=n.dataset.i;n.textContent=lang==='en'?(EN[k]||DE[k]):DE[k]});
+document.getElementById('lang').textContent=lang==='en'?'DE':'EN';document.getElementById('cap').textContent=CAP[lang][cur];
+if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'lang',v:lang},'*');}
+document.getElementById('lang').onclick=function(){lang=lang==='en'?'de':'en';localStorage.setItem('lang',lang);apply()};
+var tabs=document.querySelectorAll('#tabs button');tabs.forEach(function(b){b.onclick=function(){tabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');cur=+b.dataset.s;var img=document.getElementById('shot');img.src=cur?'assets/s'+cur+'.jpg':'assets/hero.jpg';img.alt=b.textContent;document.getElementById('cap').textContent=CAP[lang][cur]}});
+// Live-3D im Hero
+var stage=document.getElementById('stage'),chips=document.getElementById('chips'),play=document.getElementById('play');
+var st={vent:false,it:false,hlk:false,elek:false,section:false,stamps:false};
+function start(){if(frame)return;frame=document.createElement('iframe');frame.title='Live 3D';frame.loading='eager';
+frame.src='demo.html?embed=1&lang='+lang;frame.style.opacity='0';frame.style.transition='opacity .6s';
+frame.onload=function(){setTimeout(function(){frame.style.opacity='1';document.getElementById('poster').style.display='none'},900)};stage.appendChild(frame);play.remove();chips.hidden=false}
+play.onclick=start;
+var coarse=window.matchMedia('(pointer:coarse)').matches,saveData=navigator.connection&&navigator.connection.saveData;
+if(!coarse&&!saveData&&'IntersectionObserver'in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){start();io.disconnect()}},{threshold:.3});io.observe(stage)}
+chips.addEventListener('click',function(ev){var b=ev.target.closest('.chip');if(!b||!frame)return;var w=frame.contentWindow;
+if(b.dataset.m){chips.querySelectorAll('[data-m]').forEach(function(x){x.classList.toggle('on',x===b)});w.postMessage({type:'mode',m:b.dataset.m,nr:'1.01'},'*');return}
+var k=b.dataset.k;st[k]=!st[k];b.classList.toggle('on',st[k]);w.postMessage({type:'set',k:k,v:st[k]},'*');if(k==='section')w.postMessage({type:'section',h:1.1},'*')});
+// Einblenden
+if('IntersectionObserver'in window){var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.12});document.querySelectorAll('.rv').forEach(function(n){ro.observe(n)})}else document.querySelectorAll('.rv').forEach(function(n){n.classList.add('in')});
+apply();
+})();
+</script>
+</body>
+</html>
